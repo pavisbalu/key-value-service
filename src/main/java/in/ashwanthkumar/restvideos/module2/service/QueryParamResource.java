@@ -1,9 +1,8 @@
 package in.ashwanthkumar.restvideos.module2.service;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import in.ashwanthkumar.restvideos.module2.color.Color;
+
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
@@ -22,5 +21,11 @@ public class QueryParamResource {
     @Path("/uri")
     public MultivaluedMap<String, String> uriInfo(@Context UriInfo uri) {
         return uri.getQueryParameters();
+    }
+
+    @GET
+    @Path("/color")
+    public String colorParamConverter(@QueryParam("c") Color color) {
+        return color.getValue();
     }
 }

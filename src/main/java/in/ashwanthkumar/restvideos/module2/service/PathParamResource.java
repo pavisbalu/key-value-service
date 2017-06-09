@@ -1,5 +1,6 @@
 package in.ashwanthkumar.restvideos.module2.service;
 
+import in.ashwanthkumar.restvideos.module2.color.Color;
 import in.ashwanthkumar.utils.collections.Lists;
 
 import javax.ws.rs.GET;
