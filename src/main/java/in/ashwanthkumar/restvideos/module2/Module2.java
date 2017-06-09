@@ -19,6 +19,7 @@ public class Module2 extends Application<ServiceConfiguration> {
         environment.jersey().register(new HeaderParamResource());
         environment.jersey().register(new FormParamResource());
         environment.jersey().register(new CookieParamResource());
+        environment.jersey().register(new BeanParamResource());
         environment.jersey().register(new ColorParamConverterProvider());
     }
 }
