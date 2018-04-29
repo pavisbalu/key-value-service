@@ -1,10 +1,8 @@
-# Demo Rest Service
+# KeyValue Service
 
-This repo contains code to the REST videos playlist that I've. Some of this code is already part of the video and may be updated a little in the future based on feedback.
+Toy project to build a simple Key Value Service.
 
 ## Dependencies
 - JDK 8
 
 The service runs on port 8080.
-
-
