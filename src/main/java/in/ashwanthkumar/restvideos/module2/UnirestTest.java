@@ -1,25 +1,18 @@
 package in.ashwanthkumar.restvideos.module2;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.ObjectMapper;
 import com.mashape.unirest.http.Unirest;
-import io.dropwizard.Application;
-import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
-import io.dropwizard.configuration.SubstitutingSourceProvider;
-import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
+import com.mashape.unirest.http.exceptions.UnirestException;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
-public class KeyValueService extends Application<ServiceConfiguration> {
-    public static void main(String[] args) throws Exception {
-        new KeyValueService().run(args);
-    }
-
-    @Override
-    public void initialize(Bootstrap<ServiceConfiguration> bootstrap) {
-        super.initialize(bootstrap);
-
+public class UnirestTest {
+    public static  void main(String[] args) throws UnirestException {
         Unirest.setObjectMapper(new ObjectMapper() {
             private com.fasterxml.jackson.databind.ObjectMapper jacksonObjectMapper
                     = new com.fasterxml.jackson.databind.ObjectMapper();
@@ -41,15 +34,18 @@ public class KeyValueService extends Application<ServiceConfiguration> {
             }
         });
 
-        bootstrap.setConfigurationSourceProvider(
-                new SubstitutingSourceProvider(bootstrap.getConfigurationSourceProvider(),
-                        new EnvironmentVariableSubstitutor(false)
-                )
-        );
-    }
-
-    @Override
-    public void run(ServiceConfiguration serviceConfiguration, Environment environment) throws Exception {
-        environment.jersey().register(new KVService(serviceConfiguration));
+        Map<String,String> map=new HashMap<String,String>();
+        map.put("key","23");
+        map.put("value","555");
+        //map.get("23");
+        HttpResponse<String> setResponse = Unirest.post("http://localhost:8080/application/map/set")
+                .header("accept", "application/json")
+                .header("Content-Type", "application/json")
+                .body(map)
+                .asString();
+        System.out.println(setResponse.getBody());
+        final HttpResponse<String> response=Unirest.get("http://localhost:8080/application" +
+                "/map/get?key=23").asString();
+        System.out.println(response.getBody());
     }
 }

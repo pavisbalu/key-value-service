@@ -1,3 +1,4 @@
+neighbourPort: ${NEIGHBOUR_PORT}
 server:
   type: simple
   connector:
